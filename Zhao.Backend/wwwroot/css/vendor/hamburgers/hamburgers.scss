@@ -1,0 +1,26 @@
+@charset "UTF-8";
+$hamburger-layer-width         : 24px !default;
+$hamburger-layer-height        : 1px !default;
+$hamburger-layer-spacing       : 6px !default;
+$hamburger-layer-color         : #f8f8f8 !default;
+$hamburger-layer-border-radius : 8px !default;
+$hamburger-hover-opacity       : 0.85 !default;
+$hamburger-active-layer-color  : #181818 !default;
+$hamburger-active-hover-opacity: $hamburger-hover-opacity !default;
+
+$hamburger-hover-use-filter   : false !default;
+$hamburger-hover-filter       : opacity(50%) !default;
+$hamburger-active-hover-filter: $hamburger-hover-filter !default;
+
+$hamburger-types: (
+
+  elastic,
+
+) !default;
+
+
+@import "base";
+
+
+@import "types/elastic";
+

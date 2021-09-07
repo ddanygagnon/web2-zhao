@@ -1,0 +1,51 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Se connecter";
+}
+
+<section class="reservation">
+    <div class="reservation__titre">@ViewData["title"]</div>
+    <p class="reservation__sous-titre">
+        Utiliser un compte local pour vous connecter 🙃 <br /> <br />
+        <a class="link" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Pas de compte? Créer un compte</a>
+    </p>
+
+    <form id="account" method="post" class="form">
+        <div asp-validation-summary="All" class="form__text--error"></div>
+
+        <div class="form__item">
+            <label class="form__label" asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form__control" />
+            <span asp-validation-for="Input.Email" class="form__text--error"></span>
+        </div>
+        <div class="form__item">
+            <label class="form__label" asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form__control" />
+            <span asp-validation-for="Input.Password" class="form__text--error"></span>
+        </div>
+        <div class="form__item">
+            <div class="checkbox">
+                <label asp-for="Input.RememberMe">
+                    <input asp-for="Input.RememberMe" />
+                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                </label>
+            </div>
+        </div>
+        <div class="form__item">
+            <button type="submit" class="bouton form__control--bouton">Se connecter</button>
+        </div>
+
+        <div class="form__item">
+            <p class="form__item">
+                <a class="link" id="forgot-password" asp-page="./ForgotPassword">Mot de passe oublié?</a>
+            </p>
+        </div>
+    </form>
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

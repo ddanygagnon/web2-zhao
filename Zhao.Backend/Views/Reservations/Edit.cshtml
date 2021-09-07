@@ -1,0 +1,93 @@
+﻿@model Zhao.Backend.Models.Reservation
+@using Microsoft.AspNetCore.Authorization
+@using Zhao.Backend.Extra
+@inject IAuthorizationService authorizationService
+
+@{
+    ViewData["Title"] = "Editer";
+}
+
+<h1>Edit</h1>
+
+<section class="reservation">
+    <h1 class="reservation__titre form__text--info">Editer</h1>
+    <p class="reservation__sous-titre">Modifier la réservation va changer le status de confirmation à non-confirmée.</p>
+
+    <form class="form" asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="form__text--error"></div>
+        <div class="form__group">
+            <div class="form__item">
+                <label asp-for="Prenom" class="form__label"></label>
+                <input asp-for="Prenom" class="form__control">
+                <span asp-validation-for="Prenom" class="form__text--error"></span>
+            </div>
+            <div class="form__item">
+                <label asp-for="Nom" class="form__label"></label>
+                <input asp-for="Nom" class="form__control">
+                <span asp-validation-for="Nom" class="form__text--error"></span>
+            </div>
+        </div>
+        <div class="form__item">
+            <label asp-for="Type" class="form__label"></label>
+            @foreach (var choix in Model.ChoixType)
+            {
+                <div class="radio-text">
+                    @Html.RadioButtonFor(m => m.Type, choix, new { @class = "form__control--radio" })
+                    <span>@choix</span>
+                </div>
+            }
+            <br>
+            <span asp-validation-for="Type" class="form__text--error"></span>
+        </div>
+        <div class="form__group">
+            <div class="form__item">
+                <label asp-for="DateHeure" class="form__label"></label>
+                <input asp-for="DateHeure" class="form__control form__control--date">
+                <span asp-validation-for="DateHeure" class="form__text--error"></span>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__item">
+                <label asp-for="Telephone" class="form__label"></label>
+                <input asp-for="Telephone" class="form__control">
+                <span asp-validation-for="Telephone" class="form__text--error"></span>
+
+            </div>
+        </div>
+        @if ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded)
+        {
+            <div class="form__item">
+                <label asp-for="Courriel" class="form__label"></label>
+                <input asp-for="Courriel" class="form__control">
+                <span asp-validation-for="Courriel" class="form__text--error"></span>
+            </div>
+        }
+        <div class="form__group">
+            <div class="form__item">
+                <label asp-for="NbPersonnes" class="form__label"></label>
+                <input asp-for="NbPersonnes" class="form__control">
+                <span asp-validation-for="NbPersonnes" class="form__text--error"></span>
+
+            </div>
+        </div>
+
+        @if ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded)
+        {
+            <div class="form__item">
+                <label asp-for="Confirmation" class="form__label"></label>
+                <select asp-for="Confirmation" asp-items="Reservation.ChoixConfirmation" class="form__control form__control--date"></select>
+                <span asp-validation-for="Confirmation" class="form__text--error"></span>
+            </div>
+        }
+
+        <input type="submit" class="bouton form__control--bouton" value="Editer">
+    </form>
+
+    <div class="form">
+        <a class="link" asp-action="Index">Retourner à la liste de vos réservations</a>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

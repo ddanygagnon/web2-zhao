@@ -1,0 +1,29 @@
+@use "../tools" as *;
+
+%bouton, .bouton {
+	display: block;
+	width: auto;
+	background-color: $color-contrast;
+	color: $color-light !important;
+	padding: spacing(xs) spacing(lg);
+	border-radius: spacing(sm);
+	transition: background-color 250ms;
+	cursor: pointer;
+
+	&:hover {
+		background-color: darken($color-primary, 15%);
+	}
+
+	
+}
+
+.btn {
+	&--github {
+		background: url(../img/github-alt-brands.svg) no-repeat center;
+		background-size: 16px;
+	}
+	&--facebook {
+		background: url(../img/facebook-f-brands.svg) no-repeat center;
+		background-size: 8px;
+	}
+}

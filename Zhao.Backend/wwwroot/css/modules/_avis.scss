@@ -1,0 +1,21 @@
+@use "../tools" as *;
+
+.avis {
+	position: relative;
+	background-color: $color-contrast;
+	clip-path: polygon(0% 0%,100% 75px,100% 100%,0% calc(100% - 75px));
+	color: $color-light;
+	z-index: 1;
+	&__titre {
+		text-align: center;
+		padding-top: spacing(lg);
+		font-weight: 500;
+		font-size: text-size(xxxl);
+	}
+
+	&__texte {
+		font-size: text-size(xl);
+		padding-top: spacing(xl);
+		text-align: center;
+	}
+}

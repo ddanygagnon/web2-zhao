@@ -1,0 +1,88 @@
+@use "../tools" as *;
+
+.form {
+	@include container(lg);
+	@include maxWidth('sm');
+	margin-top: spacing(xxl);
+	&__label {
+		font-size: text-size(md);
+		display: block;
+		margin-bottom: spacing(xs);
+	}
+	&__item {
+		flex: 1;
+		min-width: 200px;
+		margin-bottom: spacing(lg);
+	}
+	&__text--error {
+		color: $color-error;
+	}
+	&__text--info {
+		color: $color-form;
+	}
+	&__group {
+		display: flex;
+		flex-wrap: wrap;
+		gap: spacing(md);
+	}
+	&__control {
+		vertical-align: bottom;
+		margin-bottom: spacing(xs);
+		border: 1px solid darken($color-light, 15%);
+		padding: spacing(xs) spacing(md);
+		border-radius: 3px;
+		width: 100%;
+		outline: none;
+		min-height: spacing(xl);
+		max-width: 100%;
+
+		&:disabled {
+			background-color: darken($color-light, 2%);
+			border: 1px solid darken($color-light, 15%);
+		}
+
+		&:focus {
+			transition: all 250ms ease;
+			border-color: $color-form;
+			box-shadow:  0 0 0 2px transparentize($color-form, 0.6);
+		}
+
+		&--date {
+			padding-top: 16px;
+		}
+
+		&--select {
+			padding: spacing(md);
+		}
+
+		&--radio {
+			width: spacing(md);
+			height: spacing(md);
+			vertical-align: center;
+		}
+
+		&--bouton {
+			margin-top: spacing(xl);
+			width: 100%;
+			min-height: spacing(xl);
+			text-align: center;
+			background-color: $color-form;
+			font-size: text-size(md);
+
+			&:hover {
+				background-color: darken($color-form, 5%);
+			}
+		}
+	}
+}
+
+.radio-text {
+	margin-left: spacing(lg);
+	margin-top: spacing(md);
+	display: flex;
+	align-self: center;
+
+	span {
+		margin-left: spacing(sm);
+	}
+}

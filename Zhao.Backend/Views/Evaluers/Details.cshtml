@@ -1,0 +1,15 @@
+﻿@model Zhao.Backend.Models.Evaluer
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService authorizationService
+
+@{
+    ViewData["Title"] = "Courriel";
+}
+
+@Html.Raw(@Model.CourrielHtml)
+
+<div class="form">
+    <div class="form__item">
+        @Html.ActionLink("Retour à la liste", "Index", new { }, new { @class = "link" })
+    </div>
+</div>

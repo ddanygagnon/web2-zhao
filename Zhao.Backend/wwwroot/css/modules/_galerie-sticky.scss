@@ -1,0 +1,82 @@
+@use "../tools" as *;
+
+.galerie {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+	grid-gap: spacing(lg);
+	height: 100%;
+	&-section__titre {
+		font-weight: 500;
+		font-size: text-size(xxxl);
+		padding-top: spacing(md);
+		text-align: center;
+	}
+	&-section {
+		height: 100%;
+		margin-bottom: spacing(xl);
+	}
+
+	&__image {
+		img {
+			transition: all 250ms ease;
+			box-shadow: 1px 1px 13px 3px rgba($color-contrast,0.32);
+			display: block;
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+			border-radius: 8px;
+			&:hover {
+				filter: brightness(60%);
+			}
+		}
+	}
+
+}
+
+.sticky-hero {
+	@include maxWidth(xl);
+	@include container(xxl);
+}
+
+.sticky-hero__media {
+	position: sticky;
+	z-index: 1;
+	top: 0;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+	transition: transform 0.5s var(--ease-in-out);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	transform: translateZ(0);
+}
+
+.sticky-hero--overlay-layer .sticky-hero__media::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: opacity 1s;
+}
+
+.sticky-hero--media-is-fixed.sticky-hero--overlay-layer .sticky-hero__media::after {
+	opacity: 0.5;
+}
+
+.sticky-hero--media-is-fixed.sticky-hero--scale .sticky-hero__media {
+	transform: scale(0.9);
+}
+
+.sticky-hero__content {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transform: translateZ(0);
+	height: 100%;
+}

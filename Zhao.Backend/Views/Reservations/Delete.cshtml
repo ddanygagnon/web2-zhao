@@ -1,0 +1,73 @@
+﻿@model Zhao.Backend.Models.Reservation
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<section class="reservation">
+    <h1 class="reservation__titre form__text--error">Supprimer</h1>
+    <p class="reservation__sous-titre">Une fois supprimer, vous ne pouvez plus revenir en arrière.</p>
+</section>
+
+<form asp-action="Delete" class="form">
+    <div asp-validation-summary="ModelOnly" class="form__text--error"></div>
+
+    <div class="form__group">
+        <div class="form__item">
+            <label asp-for="Prenom" class="form__label"></label>
+            <input asp-for="Prenom" class="form__control" disabled>
+            <span asp-validation-for="Prenom" class="form__text--error"></span>
+        </div>
+        <div class="form__item">
+            <label asp-for="Nom" class="form__label"></label>
+            <input asp-for="Nom" class="form__control" disabled>
+            <span asp-validation-for="Nom" class="form__text--error"></span>
+        </div>
+    </div>
+    <div class="form__group">
+        <div class="form__item">
+            <label asp-for="Type" class="form__label"></label>
+            <input asp-for="Type" class="form__control" disabled />
+            <span asp-validation-for="Type" class="form__text--error"></span>
+        </div>
+        <div class="form__item">
+            <label asp-for="Courriel" class="form__label"></label>
+            <input asp-for="Courriel" class="form__control" disabled>
+            <span asp-validation-for="Courriel" class="form__text--error"></span>
+        </div>
+    </div>
+    <div class="form__group">
+        <div class="form__item">
+            <label asp-for="DateHeure" class="form__label"></label>
+            <input asp-for="DateHeure" class="form__control form__control--date" disabled>
+            <span asp-validation-for="DateHeure" class="form__text--error"></span>
+        </div>
+    </div>
+    <div class="form__group">
+        <div class="form__item">
+            <label asp-for="Telephone" class="form__label"></label>
+            <input asp-for="Telephone" class="form__control form__control" disabled>
+            <span asp-validation-for="Telephone" class="form__text--error"></span>
+        </div>
+        <div class="form__item">
+            <label asp-for="NbPersonnes" class="form__label"></label>
+            <input asp-for="NbPersonnes" class="form__control form__control" disabled>
+            <span asp-validation-for="NbPersonnes" class="form__text--error"></span>
+        </div>
+    </div>
+    <div class="form__group">
+        <div class="form__item">
+            <label asp-for="Confirmation" class="form__label"></label>
+            <input asp-for="Confirmation" class="form__control" disabled>
+            <span asp-validation-for="Confirmation" class="form__text--error"></span>
+        </div>
+    </div>
+    <div class="form__item">
+        <input type="submit" class="bouton form__control--bouton bouton--danger" value="Supprimer l'évaluation">
+    </div>
+</form>
+
+<div class="form">
+    <a class="link" asp-action="Index">Retourner à la liste des réservations</a>
+</div>
+

@@ -1,0 +1,16 @@
+@use "../tools" as *;
+
+.reservation {
+	&__titre {
+		font-size: text-size(xxxl);
+		text-align: center;
+		padding-top: spacing(lg);
+		font-weight: 500;
+	}
+	&__sous-titre {
+		color: lighten($color-contrast, 25%);
+		text-align: center;
+		font-size: text-size(md);
+		padding-top: spacing(md);
+	}
+}

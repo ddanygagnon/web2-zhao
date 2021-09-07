@@ -1,0 +1,38 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Création d'un compte";
+}
+
+<section class="reservation">
+    <div class="reservation__titre">@ViewData["title"]</div>
+    <p class="reservation__sous-titre">
+        Création d'un nouveau compte 😀 <br /><br />
+        <a class="link" asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Vous avez déjà un compte? Se connecter</a>
+    </p>
+
+    <form class="form" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div asp-validation-summary="All" class="form__text--error"></div>
+        <br />
+        <div class="form__item">
+            <label class="form__label" asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form__control" />
+            <span asp-validation-for="Input.Email" class="form__text--error"></span>
+        </div>
+        <div class="form__item">
+            <label class="form__label" asp-for="Input.Password"></label>
+            <input asp-for="Input.Password" class="form__control" />
+            <span asp-validation-for="Input.Password" class="form__text--error"></span>
+        </div>
+        <div class="form__item">
+            <label class="form__label" asp-for="Input.ConfirmPassword"></label>
+            <input asp-for="Input.ConfirmPassword" class="form__control" />
+            <span asp-validation-for="Input.ConfirmPassword" class="form__text--error"></span>
+        </div>
+        <button type="submit" class="bouton form__control--bouton">S'enregistrer</button>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

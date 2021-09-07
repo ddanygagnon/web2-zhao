@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Zhao.Backend.Models.Reservation>
+@using Microsoft.AspNetCore.Authorization
+@using Zhao.Backend.Controllers
+@using Zhao.Backend.Extra
+@inject IAuthorizationService authorizationService
+@inject TpContext context
+
+@{
+    ViewData["Title"] = ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded ? "Les réservations" : "Mes réservations");
+}
+
+<div class="promotion">
+    <h1 class="reservation__titre">@ViewData["Title"]</h1>
+    <h3 class="reservation__sous-titre"></h3>
+</div>
+
+<div class="creation">
+    <a class="creation__btn" asp-action="Create">Effectuer une reservation</a>
+</div>
+
+@if ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded)
+{
+    <div class="creation">
+
+        <a class="link" asp-action="FiltreConfirmer">Confirmée (@context.Reservations.Count(p => p.Confirmation == "Confirmée"))</a>
+        <a class="link" asp-action="FiltreNonConfirmer">Non-confirmée (@context.Reservations.Count(p => p.Confirmation == "Non-confirmée"))</a>
+
+        @{
+            if (ReservationsFiltre.EstFiltrer)
+            {
+                <a class="link link--error" asp-action="Index">Enlever le filtre</a>
+            }
+        }
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Prenom)</th>
+            <th>@Html.DisplayNameFor(model => model.Nom)</th>
+            <th>@Html.DisplayNameFor(model => model.Type)</th>
+            <th>@Html.DisplayNameFor(model => model.DateHeure)</th>
+            <th>@Html.DisplayNameFor(model => model.Telephone)</th>
+            <th>@Html.DisplayNameFor(model => model.NbPersonnes)</th>
+            <th>@Html.DisplayNameFor(model => model.Confirmation)</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var promo in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(_ => promo.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.DateHeure)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.Telephone)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.NbPersonnes)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.Confirmation)
+                </td>
+
+                <td>
+
+                    @if ((await authorizationService.AuthorizeAsync(User, "EstUtilisateur")).Succeeded)
+                    {
+                        @Html.ActionLink("Courriel", "Details", new { id = promo.Id }, new { @class = "link" })
+                        @Html.ActionLink("Éditer", "Edit", new { id = promo.Id }, new { @class = "link" })
+                        @Html.ActionLink("Supprimer", "Delete", new { id = promo.Id }, new { @class = "link link--error" })
+                    }
+                    @if ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded)
+                    {
+                        @Html.ActionLink("Courriel", "Details", new { id = promo.Id }, new { @class = "link" })
+                        @Html.ActionLink("Éditer", "Edit", new { id = promo.Id }, new { @class = "link" })
+                        @Html.ActionLink("Supprimer", "Delete", new { id = promo.Id }, new { @class = "link link--error" })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

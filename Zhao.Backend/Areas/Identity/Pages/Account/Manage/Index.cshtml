@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+
+<section class="reservation">
+    <div class="reservation__titre">@ViewData["title"]</div>
+
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+    <form class="form" id="profile-form" method="post">
+        <div asp-validation-summary="ModelOnly" class="form__text--error"></div>
+        <div class="form__item">
+            <label class="form__label" asp-for="Username"></label>
+            <input asp-for="Username" class="form__control" disabled />
+        </div>
+        <div class="form__item">
+            <label class="form__label" asp-for="Input.PhoneNumber"></label>
+            <input asp-for="Input.PhoneNumber" class="form__control" />
+            <span asp-validation-for="Input.PhoneNumber" class="form__text--error"></span>
+        </div>
+        <button id="update-profile-button" type="submit" class="bouton bouton--success form__control--bouton">Enregistrer</button>
+    </form>
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

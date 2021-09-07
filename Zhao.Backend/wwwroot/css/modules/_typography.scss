@@ -1,0 +1,9 @@
+@use "../tools" as *;
+
+mark {
+	background-image: linear-gradient(
+					transparent 50%,
+					lighten($color-primary, 40%) 50%
+	);
+}
+

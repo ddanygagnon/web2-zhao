@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Zhao.Backend.Models.Evaluer>
+@using Microsoft.AspNetCore.Authorization
+@using Zhao.Backend.Controllers
+@using Zhao.Backend.Extra
+@inject IAuthorizationService authorizationService
+@inject TpContext context
+
+@{
+    ViewData["Title"] = ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded ? "Les évaluations" : "Mes évaluations");
+}
+
+<div class="promotion">
+    <h1 class="reservation__titre">@ViewData["Title"]</h1>
+    <h3 class="reservation__sous-titre"></h3>
+</div>
+
+
+@if ((await authorizationService.AuthorizeAsync(User, "EstUtilisateur")).Succeeded)
+{
+    <div class="creation">
+        <a class="creation__btn" asp-action="Create">Évaluer une visite</a>
+    </div>
+}
+
+<div class="creation">
+    @{
+        if (EvaluersFiltre.EstFiltrer)
+        {
+            <a class="link link--error" asp-action="Index">Enlever le filtre</a>
+        }
+    }
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Prenom)</th>
+            <th>@Html.DisplayNameFor(model => model.Nom)</th>
+            <th>Date</th>
+            <th>Repas</th>
+            <th>Service</th>
+            <th>@Html.DisplayNameFor(model => model.Commentaires)</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var promo in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(_ => promo.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.DateVisite)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.QualiteRepas)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.QualiteService)
+                </td>
+                <td>
+                    @Html.DisplayFor(_ => promo.Commentaires)
+                </td>
+
+                <td>
+
+                    @if ((await authorizationService.AuthorizeAsync(User, "EstUtilisateur")).Succeeded)
+                    {
+                        @Html.ActionLink("Courriel", "Details", new { id = promo.Id }, new { @class = "link" })
+                        @Html.ActionLink("Éditer", "Edit", new { id = promo.Id }, new { @class = "link" })
+                        @Html.ActionLink("Supprimer", "Delete", new { id = promo.Id }, new { @class = "link link--error" })
+                    }
+                    @if ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded)
+                    {
+                        @Html.ActionLink("Courriel", "Details", new { id = promo.Id }, new { @class = "link" })
+                        @Html.ActionLink("Supprimer", "Delete", new { id = promo.Id }, new { @class = "link link--error" })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded)
+{
+    <div class="form">
+        <div class="form__group">
+            <div class="form__item">
+                <div class="form__label">
+                    @Html.DisplayNameFor(m => m.QualiteRepas)
+                </div>
+
+                @for (int i = 5; i > 0; i--)
+                {
+                    if (context.Evaluations.Count(e => e.QualiteRepas == i) != 0)
+                    {
+                        <a class="link" asp-action="Filtrer" asp-route-nbEtoiles="@i">@i @(i == 1 ? "étoile" : "étoiles") @("(" + Math.Round((double)context.Evaluations.Count(e => e.QualiteRepas == i) / context.Evaluations.Count(), 2) * 100 + "%)")</a><br />
+                    }
+                }
+            </div>
+            <div class="form__item">
+                <div class="form__label">
+                    @Html.DisplayNameFor(m => m.QualiteService)
+                </div>
+                @for (int i = 5; i > 0; i--)
+                {
+                    if (context.Evaluations.Count(e => e.QualiteService == i) != 0)
+                    {
+                        <a class="link" asp-action="FiltrerService" asp-route-nbEtoiles="@i">@i @(i == 1 ? "étoile" : "étoiles") @("(" + Math.Round((double)context.Evaluations.Count(e => e.QualiteService == i) / context.Evaluations.Count(), 2) * 100 + "%)")</a><br />
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}

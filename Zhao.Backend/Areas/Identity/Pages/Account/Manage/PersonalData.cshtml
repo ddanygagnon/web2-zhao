@@ -1,0 +1,22 @@
+﻿@page
+@model PersonalDataModel
+@{
+    ViewData["Title"] = "Zone de danger";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+
+
+<div class="reservation">
+    <h4 class="reservation__titre">@ViewData["Title"]</h4>
+    <p class="reservation__sous-titre">Vos actions sont irréversibles.</p>
+</div>
+
+<div class="form">
+    <a id="delete" asp-page="DeletePersonalData" class="form__label link--error reservation__sous-titre">Supprimer votre compte</a>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

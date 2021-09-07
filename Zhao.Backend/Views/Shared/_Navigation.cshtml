@@ -1,0 +1,51 @@
+@using Zhao.Backend.Extra
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService authorizationService
+
+<li class="nav__item @Html.IsSelected("Home", "Index")">
+    <a asp-controller="Home" asp-action="Index">Accueil</a>
+</li>
+<li class="nav__item">
+    <a asp-controller="Home" asp-action="PdfMenu" target="_blank">Menu</a>
+</li>
+<li class="nav__item">
+    <a asp-controller="Home" asp-action="PdfCarteVins" target="_blank">Carte des vins</a>
+</li>
+
+@{
+    if ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded)
+    {
+        <li class="nav__item @Html.IsSelected("Reservation", "Index")">
+            <a asp-controller="Reservations" asp-action="Index">Voir les réservations</a>
+        </li>
+    }
+    else if ((await authorizationService.AuthorizeAsync(User, "EstUtilisateur")).Succeeded)
+    {
+        <li class="nav__item @Html.IsSelected("Reservation", "Index")">
+            <a asp-controller="Reservations" asp-action="Index">Effectuer une réservation</a>
+        </li>
+    }
+}
+
+@{
+    if ((await authorizationService.AuthorizeAsync(User, "EstAdministrateur")).Succeeded)
+    {
+        <li class="nav__item @Html.IsSelected("Evaluers", "Index")">
+            <a asp-controller="Evaluers" asp-action="Index">Voir les évaluations</a>
+        </li>
+    }
+    else if ((await authorizationService.AuthorizeAsync(User, "EstUtilisateur")).Succeeded)
+    {
+        <li class="nav__item @Html.IsSelected("Evaluers", "Index")">
+            <a asp-controller="Evaluers" asp-action="Index">Évaluer une visite</a>
+        </li>
+    }
+}
+
+
+
+<li class="nav__item @Html.IsSelected("Promotions", "Index,Editer")">
+    <a asp-controller="Promotions" asp-action="Index">Promotions</a>
+</li>
+
+<partial name="_LoginPartial" />

@@ -1,0 +1,12 @@
+@use "../tools" as *;
+
+.client {
+	padding-top: spacing(xxxl);
+	padding-bottom: spacing(xxxxl);
+
+	text-align: center;
+
+	&__nom {
+		font-weight: 500;
+	}
+}

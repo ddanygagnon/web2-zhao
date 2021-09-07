@@ -1,0 +1,16 @@
+@use "breakpoints" as *;
+@use "spacing" as *;
+
+@mixin container($i) {
+	width: calc(100% - 2 * #{spacing($i)});
+
+	margin-right: auto;
+	margin-left: auto;
+}
+
+@mixin display($size) {
+	display: none;
+	@include breakpoint($size) {
+		display: block;
+	}
+}

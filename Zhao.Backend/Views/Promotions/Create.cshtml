@@ -1,0 +1,54 @@
+﻿@model Promotion
+
+@{
+    ViewBag.Title = "Création d'une promotion";
+}
+
+<section class="reservation">
+    <div class="reservation__titre">Créer</div>
+    <p class="reservation__sous-titre"></p>
+    <form asp-action="Create" class="form">
+        <div asp-validation-summary="ModelOnly" class="form__text--error"></div>
+
+        <div class="form__group">
+            <div class="form__item">
+                <label asp-for="Type" class="form__label"></label>
+                <select asp-for="Type" asp-items="Promotion.ChoixType" class="form__control form__control--date"></select>
+                <span asp-validation-for="Type" class="form__text--error"></span>
+            </div>
+            <div class="form__item">
+                <label asp-for="TauxApplicable" class="form__label"></label>
+                <input asp-for="TauxApplicable" class="form__control">
+                <span asp-validation-for="TauxApplicable" class="form__text--error"></span>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__item">
+                <label asp-for="Description" class="form__label"></label>
+                <input asp-for="Description" class="form__control">
+                <span asp-validation-for="Description" class="form__text--error"></span>
+            </div>
+        </div>
+        <div class="form__group">
+            <div class="form__item">
+                <label asp-for="DateDebut" class="form__label"></label>
+                <input asp-for="DateDebut" class="form__control form__control--date">
+                <span asp-validation-for="DateDebut" class="form__text--error"></span>
+            </div>
+            <div class="form__item">
+                <label asp-for="DateFin" class="form__label"></label>
+                <input asp-for="DateFin" class="form__control form__control--date">
+                <span asp-validation-for="DateFin" class="form__text--error"></span>
+            </div>
+        </div>
+        <input type="submit" class="bouton form__control--bouton bouton--success" value="Créer la promotion">
+    </form>
+
+    <div class="form">
+        <a class="link" asp-action="Index">Retourner à la liste de promotions</a>
+    </div>
+</section>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

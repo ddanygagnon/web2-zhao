@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Accueil";
+}
+
+<section class="hero">
+    <h1 class="hero__titre">Zhào</h1>
+    <div class="hero__contenu">
+        <h2 class="hero__sous-titre">Restaurant Asiatique</h2>
+        <p class="hero__description">
+            La famille Zhào oeuvre dans le domaine de la restauration de génération en génération <mark>depuis 1954</mark>.
+            Celle-ci est réputée pour offrir des mets d'<mark>une qualité exceptionnelle</mark>, et ce, dans une ambiance chaleureuse.
+            Venez passer une agréable soirée avec nous, vous serez enchanté de déguster un de nos <mark>délicieux repas</mark> et vous serez traité
+            avec soin par un de nos dévoués employés.
+        </p>
+        <a class="hero__btn" asp-controller="Reservations" asp-action="Index">Prendre réservation</a>
+
+        <p class="hero__telephone">(450) 465-6585</p>
+    </div>
+    <div class="hero__image" role="img"></div>
+</section>
+
+<section class="avis">
+    <h2 class="avis__titre">Avis</h2>
+    <div class="etoiles">
+        @for (var i = 0; i < 5; i++)
+        {
+            <div class="etoile"></div>
+        }
+    </div>
+    <div class="avis__texte">
+        “Très bon service”
+    </div>
+    <div class="client">
+        <p class="client__nom">Sebastien Huot</p>
+        <p class="client__description">Client aimé de Zhào</p>
+    </div>
+</section>
+
+<section class="galerie-section js-sticky-hero sticky-hero sticky-hero--overlay-layer">
+    <div class="galerie-section__titre sticky-hero__media" aria-hidden="true">Galerie</div>
+    <div class="sticky-hero__content">
+        <ul class="galerie">
+            @for (var i = 1; i <= 13; i++)
+            {
+                <li class="galerie__image">
+                    <img src="~/img/galerie/galerie@(i).webp" alt="Image @(i) de la galerie">
+                </li>
+            }
+        </ul>
+    </div>
+</section>

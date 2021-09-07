@@ -1,0 +1,88 @@
+﻿@using Zhao.Backend.Extra
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewData["Title"] - Zhao</title>
+    <link rel="stylesheet" href="~/css/main.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<style>
+    ::selection {
+        color: #181818;
+    }
+
+    .notif {
+        background-color: #dee5dc;
+        text-align: center;
+        padding-top: 1.25em;
+        padding-bottom: 1.25em;
+    }
+</style>
+@{
+    var currentAction = ViewContext.RouteData.Values["action"] as string == "Supprimer";
+    var currentController = ViewContext.RouteData.Values["controller"] as string == "Promotions";
+    var estSupprimer = currentAction && currentController;
+}
+<body class="@(estSupprimer ? "changeBackground--red" : "changeColor")">
+
+    @if (Notification.Message != string.Empty)
+    {
+        <div class="notif">
+            @Notification.Message
+        </div>
+    }
+
+    <nav>
+        <ul class="nav" id="zhaoNav">
+            <li>
+                <a class="nav__item--close" href="javascript:void(0)" id="zhaoNavClose">&times;</a>
+            </li>
+
+            @await Html.PartialAsync("_Navigation")
+        </ul>
+        <div class="hamburger hamburger--elastic" id="zhaoNavOpen">
+            <div class="hamburger-box">
+                <div class="hamburger-inner"></div>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    <footer class="footer">
+        <nav>
+            <ul class="footer__nav">
+                @await Html.PartialAsync("_Navigation")
+            </ul>
+        </nav>
+        <div class="copyright__icon"></div>
+        <p class="copyright">
+            &copy; Droits d'auteur. Tous les droits sont réservés. <br> Dany Gagnon
+            <span class="footer__btn--container">
+                <a asp-controller="Home"
+                   asp-action="LienVersGithub"
+                   target="_blank"
+                   class="btn--github footer__btn">
+                </a>
+                <a asp-controller="Home"
+                   asp-action="LienVersFb"
+                   target="_blank"
+                   class="btn--facebook footer__btn">
+                </a>
+
+            </span>
+        </p>
+    </footer>
+
+    <a href="#" class="back-top js-back-top"></a>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/main.js"></script>
+    @await RenderSectionAsync("Scripts", false)
+</body>
+</html>

@@ -1,0 +1,14 @@
+$spacings: (
+	xs: 0.5em,
+	sm: 0.75em,
+	md: 1.25em,
+	lg: 2em,
+	xl: 3.25em,
+	xxl: 5.25em,
+	xxxl: 8.5em,
+	xxxxl: 13.75em,
+);
+
+@function spacing($space) {
+	@return map-get($map: $spacings, $key: $space);
+}

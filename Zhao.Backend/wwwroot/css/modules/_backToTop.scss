@@ -1,0 +1,37 @@
+@use "../tools" as *;
+
+$btt-size: spacing(lg);
+$btt-margin-size: spacing(md);
+
+.back-top {
+	position: fixed;
+	bottom: $btt-margin-size;
+	right: $btt-margin-size;
+	display: inline-block;
+	height: $btt-size;
+	width: $btt-size;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	border-radius: 8px;
+	padding: spacing(md);
+	background: url(../img/chevron-up-solid.svg) no-repeat center $color-contrast;
+	background-size: 16px;
+	z-index: 9999;
+
+	visibility: hidden;
+	opacity: 0;
+	transition: opacity .3s, visibility .3s, background-color .3s;
+
+	&:hover {
+		background-color: lighten($color-contrast, 10%);
+		opacity: 1;
+	}
+
+	&--is-visible {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	&--face-out {
+		opacity: 1;
+	}
+}

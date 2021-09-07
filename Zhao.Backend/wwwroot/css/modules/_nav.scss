@@ -1,0 +1,118 @@
+@use "../tools" as *;
+
+.nav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 2000;
+	top: 0;
+	left: 0;
+	background-color: #181818;
+	overflow-x: hidden;
+	padding-top: spacing(md);
+	transition: 0.5s;
+
+	@include breakpoint(sm) {
+		display: flex;
+		background-color: transparent;
+		color: $color-contrast;
+		position: relative;
+		@include container(xl);
+		font-size: text-size(md);
+		justify-content: space-evenly;
+		padding-top: spacing(lg);
+		padding-bottom: spacing(lg);
+	}
+
+	& > &__item {
+		color: darken($color-light, 30%);
+
+		&:hover {
+			color: darken($color-light, 15%);
+		}
+		&--is-active {
+			color: $color-light;
+		}
+
+		@include breakpoint(sm) {
+			color: lighten($color-contrast, 30%);
+			&:hover {
+				color: lighten($color-contrast, 15%);
+			}
+			&--is-active {
+				color: $color-contrast;
+				text-decoration: underline solid $color-contrast 1px;
+			}
+		}
+	}
+
+	.footer__nav > &__item {
+		color: lighten($color-contrast, 30%);
+		&:hover {
+			color: lighten($color-contrast, 15%);
+		}
+		&--is-active {
+			color: $color-contrast;
+			text-decoration: underline solid $color-contrast 1px;
+		}
+	}
+
+	&__item {
+		transition: color 250ms ease;
+		padding: spacing(sm);
+		font-size: text-size(md);
+
+
+		@include breakpoint(sm) {
+			color: lighten($color-contrast, 30%);
+			&:hover {
+				color: lighten($color-contrast, 15%);
+			}
+			&--is-active {
+				color: $color-contrast;
+				text-decoration: underline solid $color-contrast 1px;
+			}
+		}
+
+		&--close {
+			color: $color-light;
+			@include breakpoint(sm) {
+				display: none;
+			}
+			position: absolute;
+			top: spacing(sm);
+			right: spacing(md);
+			font-size: text-size(xl);
+		}
+	}
+}
+
+.hamburger {
+	width: 48+4px;
+	height: 48+4px;
+	background-color: $color-contrast;
+	position: fixed;
+	z-index: 1000;
+	border-radius: 50%;
+	right: spacing(md);
+	top: spacing(lg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	@include breakpoint(sm) {
+		display: none;
+	}
+}
+
+.closebtn {
+	@include breakpoint(sm) {
+		display: none;
+	}
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+

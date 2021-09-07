@@ -1,0 +1,136 @@
+@use "tools" as *;
+@use "vendor/hamburgers/hamburgers";
+@use "modules";
+
+body {
+	font-family: $font-primary;
+	color: $color-contrast;
+}
+
+::selection {
+	background: lighten($color-primary, 40%);
+	color: $color-contrast;
+}
+
+.content {
+	height: 1000px;
+}
+
+.table {
+	display: table;
+	margin-top: spacing(md);
+	@include container(md);
+	@include maxWidth(md);
+	width: 100%;
+
+	@media (max-width: breakpoint(sm)) {
+		.table, thead, tbody, th, td, tr {
+			display: block;
+		}
+		thead tr {
+			position: absolute;
+			top: -9999px;
+			left: -9999px;
+		}
+		td {
+			position: relative;
+			padding-left: 45% !important;
+			border: none;
+
+			&:before {
+				position: absolute;
+				width: 45%;
+				padding-right: 10px;
+				left: spacing(sm);
+				white-space: nowrap;
+			}
+		}
+
+		td:nth-of-type(1):before { content: "Prénom" }
+		td:nth-of-type(2):before { content: "Nom" }
+		td:nth-of-type(3):before { content: "Description" }
+		td:nth-of-type(4):before { content: "Date de début" }
+		td:nth-of-type(5):before { content: "Date de fin" }
+		td:nth-of-type(6):before { content: "Options" }
+	}
+
+	thead tr {
+		background-color: $color-light;
+	}
+
+	tr:nth-child(even) {
+		background-color: $color-light;
+	}
+	th {
+		text-align: left;
+		font-weight: 500;
+		padding: spacing(md);
+	}
+	td {
+		padding: spacing(md);
+	}
+}
+
+a.link {
+	color: $color-form;
+	transition: color 250ms ease;
+	padding-right: spacing(sm);
+	&:last-child {
+		padding-right: 0;
+	}
+	&--error {
+		color: $color-error;
+
+		&:hover {
+			color: lighten($color-error, 10%) !important;
+		}
+	}
+
+	&:hover {
+		color: lighten($color-form, 10%);
+		text-decoration: underline;
+	}
+}
+
+.creation {
+	@include container(xl);
+	@include maxWidth(md);
+	margin-top: spacing(xxl);
+	padding-bottom: spacing(lg);
+	@include breakpoint(sm) {
+		padding-bottom: spacing(sm);
+	}
+
+	text-align: center;
+	@include breakpoint(sm) {
+		text-align: right;
+	}
+
+	& &__btn {
+		transition: background-color 250ms ease;
+		padding: spacing(xs) spacing(sm);
+		border-radius: 8px;
+		border: 1px solid $color-primary;
+		background-color: $color-light;
+		color: darken($color-primary, 10%);
+
+		&:hover {
+			background-color: darken($color-light, 5%);
+		}
+	}
+}
+
+.bouton--danger {
+	background-color: $color-error;
+
+	&:hover {
+		background-color: darken($color-error, 15%);
+	}
+}
+
+.bouton--success {
+	background-color: $color-primary;
+	&:hover {
+		background-color: darken($color-primary, 10%);
+	}
+}

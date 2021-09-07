@@ -1,0 +1,30 @@
+﻿@page
+@model DeletePersonalDataModel
+@{
+    ViewData["Title"] = "Fermer mon compte";
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<div class="reservation">
+    <h4 class="reservation__titre">@ViewData["Title"]</h4>
+    <p class="reservation__sous-titre">En supprimant votre compte, vous n'aurez plus accès à vos données et cette action est irréversible.</p>
+</div>
+
+<div>
+    <form id="delete-user" method="post" class="form">
+        <div asp-validation-summary="All" class="form__text--error"></div>
+        @if (Model.RequirePassword)
+        {
+            <div class="form__item">
+                <label class="form__label" asp-for="Input.Password"></label>
+                <input asp-for="Input.Password" class="form__control" />
+                <span asp-validation-for="Input.Password" class="form__text--error"></span>
+            </div>
+        }
+        <button class="bouton bouton--danger form__control--bouton" type="submit">Fermer mon compte</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

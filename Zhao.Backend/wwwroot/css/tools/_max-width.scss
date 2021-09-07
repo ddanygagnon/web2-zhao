@@ -1,0 +1,11 @@
+$maxWidths: (
+		xs: 38rem, // ~608px
+		sm: 48rem, // ~768px
+		md: 64rem, // ~1024px
+		lg: 80rem, // ~1280px
+		xl: 90rem  // ~1440px
+) !default;
+
+@mixin maxWidth($width) {
+	max-width: map-get($map: $maxWidths, $key: $width);
+}

@@ -1,0 +1,72 @@
+﻿@model Zhao.Backend.Models.Evaluer
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<section class="evaluer">
+    <h1 class="reservation__titre">Évaluer votre visite</h1>
+    <p class="reservation__sous-titre">Vous recevrez une confirmation par courriel.</p>
+    <form class="form" asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="form__text--error"></div>
+        <div class="form__group">
+            <div class="form__item">
+                <label class="form__label" asp-for="Prenom"></label>
+                <input class="form__control" asp-for="Prenom">
+                <span asp-validation-for="Prenom" class="form__text--error"></span>
+            </div>
+            <div class="form__item">
+                <label class="form__label" asp-for="Nom"></label>
+                <input class="form__control" asp-for="Nom">
+                <span asp-validation-for="Nom" class="form__text--error"></span>
+
+            </div>
+        </div>
+        <div class="form__item">
+            <label asp-for="Type" class="form__label"></label>
+            @foreach (var choix in Evaluer.ChoixType)
+            {
+                <div class="radio-text">
+                    @Html.RadioButtonFor(m => m.Type, choix, new { @class = "form__control--radio" })
+                    <span>@choix</span>
+                </div>
+            }
+            <br>
+            <span asp-validation-for="Type" class="form__text--error"></span>
+        </div>
+        <div class="form__item">
+            <label class="form__label" asp-for="DateVisite"></label>
+            <input class="form__control form__control--date" asp-for="DateVisite">
+            <span asp-validation-for="DateVisite" class="form__text--error"></span>
+
+        </div>
+        <div class="form__item">
+            <label class="form__label" asp-for="QualiteRepas"></label>
+            <input class="form__control" asp-for="QualiteRepas">
+            <span asp-validation-for="QualiteRepas" class="form__text--error"></span>
+
+        </div>
+        <div class="form__item">
+            <label class="form__label" asp-for="QualiteService"></label>
+            <input class="form__control" asp-for="QualiteService">
+            <span asp-validation-for="QualiteService" class="form__text--error"></span>
+
+        </div>
+        <div class="form__item">
+            <label class="form__label" asp-for="Commentaires">Commentaires</label>
+            <textarea class="form__control" asp-for="Commentaires" rows="6"></textarea>
+            <span asp-validation-for="Commentaires" class="form__text--error"></span>
+        </div>
+        <input class="bouton bouton--success form__control--bouton" type="submit" value="Évaluer la visite">
+    </form>
+
+    <div class="form">
+        <a class="link" asp-action="Index">Retourner à la liste de vos évaluations</a>
+    </div>
+</section>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

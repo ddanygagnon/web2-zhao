@@ -1,0 +1,19 @@
+@use "../tools" as *;
+
+.etoiles {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: spacing(xl);
+}
+
+.etoile {
+	width: text-size(xl);
+	height: text-size(xl);
+	background: url("../img/star-solid.svg") no-repeat center;
+	margin-right: spacing(md);
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
